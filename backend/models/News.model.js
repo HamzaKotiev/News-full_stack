@@ -21,6 +21,10 @@ const newsSchema = mongoose.Schema({
     author: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User'
+    },
+    popularity: {
+        type: Number,
+        required: true
     }
 
 });
