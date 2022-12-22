@@ -15,13 +15,13 @@ module.exports.newsController = {
 
     },
 
-    // три нижних функции будут доступный только админу 
+    // 
     addNews: async (req, res) => {
         try {
             const news = await News.create({
                 title: req.body.title,
                 text: req.body.text,
-                catygories: req.body.catygories,
+                categories: req.body.categories,
                 when: req.body.when,
                 author: req.body.author,
                 popularity: req.body.popularity
@@ -37,11 +37,11 @@ module.exports.newsController = {
             const news = await News.findByIdAndUpdate(req.params.id, {
                 title: req.body.title,
                 text: req.body.text,
-                catygories: req.body.catygories,
+                categories: req.body.categories,
                 when: req.body.when,
                 author: req.body.author,
                 popularity: req.body.popularity
-            })
+            },{new: true})
 
             return res.json(news)
         } catch (error) {
@@ -52,7 +52,7 @@ module.exports.newsController = {
         try {
             const news = await News.findByIdAndDelete(req.params.id)
 
-            return res.json(news)
+            return res.json('Удалено')
         } catch (error) {
             return res.json({ error: error.message })
         }
@@ -60,16 +60,39 @@ module.exports.newsController = {
 
 
     getNewsById: async (req, res) => {
-
+        try {
+            const news = await News.findById(req.params.id)
+            return res.json(news)
+        } catch (error) {
+            return res.json({ error: error.message })
+        }
     },
-    getNewsByCatygori: async (req, res) => {
+    getNewsByCategori: async (req, res) => {
+        try {
+            const news = await News.find({categories: req.body.categories})
 
+            return res.json(news)
+        } catch (error) {
+            return res.json({ error: error.message })
+        }
     },
     getNewsByWhen: async (req, res) => {
+        try {
+            const news = await News.find({when: req.body.when})
 
+            return res.json(news)
+        } catch (error) {
+            return res.json({ error: error.message })
+        }
     },
     getNewsByPopularity: async (req, res) => {
+        try {
+            const news = await News.find({popularity: req.body.popularity})
 
+            return res.json(news)
+        } catch (error) {
+            return res.json({ error: error.message })
+        }
     },
 
 };

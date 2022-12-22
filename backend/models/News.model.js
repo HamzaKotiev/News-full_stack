@@ -10,7 +10,7 @@ const newsSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    catygories: {
+    categories: {
         type: String,
         required: true
     },

@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 
 const commentSchema = mongoose.Schema({
-    title: {
+    usernick: {
         type: String,
         required: true
     },
@@ -10,14 +10,18 @@ const commentSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    catygories: {
-        type: String,
-        required: true
-    },
     when: {
         type: String,
         required: true
-    }
+    },
+    author: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+    },
+    news: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'News'
+    },
 
 });
 

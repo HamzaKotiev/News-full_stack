@@ -16,7 +16,7 @@ module.exports.usersController = {
     },
     registerUser: async (req, res) => {
         try {
-            const { login, password, admin_key } = req.body;
+            const { login, password, admin_key, nickname } = req.body;
 
             const hash = await bcrypt.hash(
                 password,
@@ -25,12 +25,14 @@ module.exports.usersController = {
             if (admin_key === process.env.ADMIN_KEY) {
                 const user = await User.create({
                     login,
+                    nickname,
                     password: hash,
                     adminstatus: true
                 });
             }
             const user = await User.create({
                 login,
+                nickname,
                 password: hash,
                 adminstatus: false
             });
